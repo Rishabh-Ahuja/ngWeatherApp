@@ -1,0 +1,38 @@
+<div ng-show="!WeatherResult.error.message"><span>Forecast for {{WeatherResult.location.name}}</span><br>
+    <span>Region {{WeatherResult.location.region}}</span><br>
+
+    <span>Country: {{WeatherResult.location.country}}</span><br>
+    <span>Current Local Time {{WeatherResult.location.localtime | date: 'h'}}</span>
+</div>
+<!--if error no city -->
+<span ng-show="WeatherResult.error.message"><span
+        class="alert alert-warning">Forecast Not Found For {{city}}</span></span>
+<hr>
+
+<div ng-show="WeatherResult.error.message"><Strong class="alert alert-danger">{{WeatherResult.error.message}}</Strong>
+</div>
+<!--end error-->
+
+<div class="row" ng-cloak>
+    <div class="col-md-12" ng-show="!WeatherResult.error.message"><input type="number" ng-model="days" min="2" max="10">
+        <span>Days Forecast</span></div>
+    <hr>
+    <a href="#/" class="col-md-12">
+        <button class="btn btn-success">Back To Search</button>
+    </a>
+</div>
+<hr>
+<div class="panel panel-default" ng-repeat="W in WeatherResult.forecast.forecastday">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{W.date | date:'longDate'}} Condition : {{W.day.condition.text}}</h3>
+        <img ng-src={{W.day.condition.icon}} class="img-responsive">
+    </div>
+    <div class="panel-body">
+        <p>Max Temperature {{W.day.maxtemp_c}} &#8451;</p>
+        <p>Min Temperature {{W.day.mintemp_c}} &#8451;</p>
+        <p>Avg. Temperature {{W.day.avgtemp_c}} &#8451;</p>
+
+    </div>
+</div>
+<!--<pre>{{WeatherResult | json}}</pre>-->
+
