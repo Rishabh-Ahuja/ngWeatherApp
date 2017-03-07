@@ -41,7 +41,7 @@ weatherApp.controller('forecastController', ['$scope','$resource','$routeParams'
     $scope.$watch('days',function () {
         $scope.WeatherResult = $scope.WeatherApi.get({q:$scope.city,days:$scope.days})
     });
-    $scope.call = 'http://api.apixu.com/v1/forecast.json?key=b8598241aafe4b0d9a424303172202';
+    $scope.call = 'https://api.apixu.com/v1/forecast.json?key=b8598241aafe4b0d9a424303172202';
     $scope.WeatherApi = $resource($scope.call,{callback:'JSON_CALLBACK'});
     $scope.WeatherResult = $scope.WeatherApi.get({q:$scope.city,days:$scope.days});
     $scope.notFound;
