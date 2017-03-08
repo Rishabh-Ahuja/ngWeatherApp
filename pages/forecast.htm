@@ -1,4 +1,8 @@
-<div ng-show="!WeatherResult.error.message"><span>Forecast for {{WeatherResult.location.name}}</span><br>
+<div class="col-md-6 col-md-offset-3" ng-show="!showCity">
+    <img src="reload.svg" alt="reloader">
+</div>
+<div ng-show="showCity && !WeatherResult.error.message">
+    <span>Forecast for {{WeatherResult.location.name}}</span><br>
     <span>Region {{WeatherResult.location.region}}</span><br>
 
     <span>Country: {{WeatherResult.location.country}}</span><br>
@@ -13,25 +17,27 @@
 </div>
 <!--end error-->
 
-<div class="row" ng-cloak>
-    <div class="col-md-12" ng-show="!WeatherResult.error.message"><input type="number" ng-model="days" min="2" max="10">
-        <span>Days Forecast</span></div>
-    <hr>
-    <a href="#/" class="col-md-12">
-        <button class="btn btn-success">Back To Search</button>
-    </a>
-</div>
-<hr>
-<div class="panel panel-default" ng-repeat="W in WeatherResult.forecast.forecastday">
-    <div class="panel-heading">
-        <h3 class="panel-title">{{W.date | date:'longDate'}} Condition : {{W.day.condition.text}}</h3>
-        <img ng-src={{W.day.condition.icon}} class="img-responsive">
+<div ng-show="showCity">
+    <div class="row" ng-cloak>
+        <div class="col-md-12"><input type="number" ng-model="days" min="2" max="10">
+            <span>Days Forecast</span></div>
+        <hr>
+        <a href="#/" class="col-md-12">
+            <button class="btn btn-success">Back To Search</button>
+        </a>
     </div>
-    <div class="panel-body">
-        <p>Max Temperature {{W.day.maxtemp_c}} &#8451;</p>
-        <p>Min Temperature {{W.day.mintemp_c}} &#8451;</p>
-        <p>Avg. Temperature {{W.day.avgtemp_c}} &#8451;</p>
+    <hr>
+    <div class="panel panel-default" ng-repeat="W in WeatherResult.forecast.forecastday">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{W.date | date:'longDate'}} Condition : {{W.day.condition.text}}</h3>
+            <img ng-src={{W.day.condition.icon}} class="img-responsive">
+        </div>
+        <div class="panel-body">
+            <p>Max Temperature {{W.day.maxtemp_c}} &#8451;</p>
+            <p>Min Temperature {{W.day.mintemp_c}} &#8451;</p>
+            <p>Avg. Temperature {{W.day.avgtemp_c}} &#8451;</p>
 
+        </div>
     </div>
 </div>
 <!--<pre>{{WeatherResult | json}}</pre>-->
